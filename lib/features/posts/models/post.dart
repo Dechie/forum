@@ -1,4 +1,4 @@
-import 'user.dart';
+import '../../auth/models/user.dart';
 
 class Post {
   Post({

@@ -22,6 +22,19 @@ class PostField extends StatelessWidget {
         ),
         child: TextField(
           controller: controller,
+          enableInteractiveSelection: true,
+          // Prevent keyboard from popping up when user long presses
+          onTap: () {
+            Future.delayed(
+              Duration.zero,
+              () {
+                controller.selection = TextSelection(
+                  baseOffset: 0,
+                  extentOffset: controller.text.length,
+                );
+              },
+            );
+          },
           decoration: InputDecoration(
             border: InputBorder.none,
             hintText: hintText,

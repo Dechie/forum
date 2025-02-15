@@ -2,9 +2,9 @@ import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
 import 'package:hive_flutter/hive_flutter.dart';
 
-import '../constants.dart';
-import '../models/post.dart';
-import '../models/user.dart';
+import '../core/constants.dart';
+import '../features/posts/models/post.dart';
+import '../features/auth/models/user.dart';
 
 class PostProvider extends ChangeNotifier {
   var usersBox = Hive.box('users');

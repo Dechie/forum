@@ -4,7 +4,7 @@ import 'package:forumapp/providers/post_provider.dart';
 import 'package:hive_flutter/hive_flutter.dart';
 import 'package:provider/provider.dart';
 import 'home.dart';
-import 'models/user.dart';
+import 'features/auth/models/user.dart';
 import 'screens/login_screen.dart';
 import 'screens/register_screen.dart';
 

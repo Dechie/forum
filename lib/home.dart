@@ -4,9 +4,7 @@ import 'package:forumapp/providers/post_provider.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
 
-import 'models/user.dart';
-import 'widgets/post_data.dart';
-import 'widgets/post_field.dart';
+import 'features/auth/models/user.dart';
 
 class HomePage extends StatefulWidget {
   const HomePage({
@@ -22,7 +20,7 @@ class HomePage extends StatefulWidget {
 
 class _HomePageState extends State<HomePage> {
   final TextEditingController _postController = TextEditingController();
-
+  bool isLoading = false;
   @override
   void initState() {
     super.initState();
@@ -30,20 +28,22 @@ class _HomePageState extends State<HomePage> {
     fetchValues(poster);
   }
 
-  // void fetchValues(PostProvider poster) async {
-  //   poster.setLoading(true);
-  //   await poster.fetchPosts();
-  //   poster.setLoading(false);
-  // }
+  
   void fetchValues(PostProvider poster) async {
-    // poster.setLoading(true);
+    //poster.setLoading(true);
+    setState(() {
+      isLoading = true;
+    });
     try {
       await poster.fetchPosts();
     } catch (error) {
       print("Error fetching posts: $error");
       // Handle error appropriately, e.g., show error message
     } finally {
-      // poster.setLoading(false);
+      //poster.setLoading(false);
+      setState(() {
+        isLoading = false;
+      });
     }
   }
 
@@ -86,9 +86,15 @@ class _HomePageState extends State<HomePage> {
                 onPressed: () async {
                   await poster.createPost(content: _postController.text.trim());
                   _postController.clear();
-                  poster.setLoading(true);
+                  //poster.setLoading(true);
+                  setState(() {
+                    isLoading = true;
+                  });
                   await poster.fetchPosts();
-                  poster.setLoading(false);
+                  setState(() {
+                    isLoading = false;
+                  });
+                  //poster.setLoading(false);
                 },
                 child: Text(
                   'post',
@@ -99,16 +105,19 @@ class _HomePageState extends State<HomePage> {
               SizedBox(
                 width: double.infinity,
                 height: MediaQuery.of(context).size.height * 0.7,
-                child: poster.isLoading
+                child: isLoading
                     ? const Center(
                         child: CircularProgressIndicator(color: Colors.black),
                       )
-                    : ListView(
-                        children: [
-                          ...poster.posts
-                              .map((post) => PosttData(post: post))
-                              .toList(),
-                        ],
+                    :
+                    
+                    ListView.separated(
+                        itemBuilder: (context, index) => PosttData(
+                          post: poster.posts[index],
+                        ),
+                        separatorBuilder: (context, index) =>
+                            const SizedBox(height: 15),
+                        itemCount: poster.posts.length,
                       ),
               )
             ],

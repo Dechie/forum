@@ -1,8 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 
-import '../models/post.dart';
-import '../models/user.dart';
+
 
 class PosttData extends StatelessWidget {
   const PosttData({
@@ -40,16 +39,22 @@ class PosttData extends StatelessWidget {
               Text(
                 post.user.email,
                 style: GoogleFonts.poppins(
-                  textStyle: const TextStyle(fontSize: 8),
+                  textStyle: const TextStyle(
+                    fontSize: 8,
+                  ),
                   fontWeight: FontWeight.w600,
                 ),
               ),
               const SizedBox(height: 10),
               Text(
-                //'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed ac sapien nisi. Nulla eget ultricies lorem. Cras auctor sodales mauris, sit amet laoreet nisi interdum vel. Nullam condimentum laoreet ante, eget tincidunt risus eleifend non.',
                 post.content,
-                style: GoogleFonts.poppins(),
+                style: GoogleFonts.poppins(
+                  textStyle: const TextStyle(
+                    overflow: TextOverflow.fade,
+                  ),
+                ),
               ),
+              const Spacer(),
               Row(
                 children: [
                   IconButton(
