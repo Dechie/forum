@@ -3,10 +3,7 @@ import 'package:dio/dio.dart';
 class AuthDataSource {
   final Dio dio;
 
-  AuthDataSource({required this.dio}) {
-    dio.options.baseUrl =
-        'http://your-backend-url/api'; // Change this to your backend URL
-  }
+  AuthDataSource({required this.dio});
 
   Future<Map<String, dynamic>> getUser(String token) async {
     try {

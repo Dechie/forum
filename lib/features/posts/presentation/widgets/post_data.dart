@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 
+import '../../models/post.dart';
+
 
 
 class PosttData extends StatelessWidget {
@@ -10,7 +12,6 @@ class PosttData extends StatelessWidget {
     required this.post,
   });
 
-  //final User? user;
   final Post post;
   @override
   Widget build(BuildContext context) {
