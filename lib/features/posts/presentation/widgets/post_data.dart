@@ -3,21 +3,19 @@ import 'package:google_fonts/google_fonts.dart';
 
 import '../../models/post.dart';
 
-
-
 class PosttData extends StatelessWidget {
+  final Post post;
+
   const PosttData({
     super.key,
     //required this.user,
     required this.post,
   });
-
-  final Post post;
   @override
   Widget build(BuildContext context) {
     //print(user!.token);
     return SizedBox(
-      height: 210,
+      height: 400,
       width: double.infinity,
       child: DecoratedBox(
         decoration: BoxDecoration(
@@ -30,7 +28,7 @@ class PosttData extends StatelessWidget {
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               Text(
-                post.user.name,
+                post.userName,
                 style: GoogleFonts.poppins(
                   textStyle: const TextStyle(
                     fontWeight: FontWeight.w600,
@@ -38,7 +36,7 @@ class PosttData extends StatelessWidget {
                 ),
               ),
               Text(
-                post.user.email,
+                post.userEmail,
                 style: GoogleFonts.poppins(
                   textStyle: const TextStyle(
                     fontSize: 8,

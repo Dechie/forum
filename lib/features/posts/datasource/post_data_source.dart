@@ -1,4 +1,5 @@
 import 'package:dio/dio.dart';
+import 'package:forumapp/features/posts/models/post.dart';
 
 class PostDataSource {
   final Dio dio;
@@ -25,15 +26,19 @@ class PostDataSource {
     }
   }
 
-  Future<List<Map<String, dynamic>>> fetchPosts(String token) async {
+  Future<List<Post>> fetchPosts() async {
+    List<Post> posts = [];
     try {
-      final response = await dio.get('/feeds',
-          options: Options(headers: {'Authorization': 'Bearer $token'}));
-
-      return List<Map<String, dynamic>>.from(response.data);
+      final response = await dio.get('/feeds');
+      //options: Options(headers: {'Authorization': 'Bearer $token'}));
+      var responseData = List<Map<String, dynamic>>.from(response.data);
+      for (var data in responseData) {
+        posts.add(Post.fromJson(data));
+      }
     } catch (e) {
       throw Exception('Failed to fetch posts: ${e.toString()}');
     }
+    return posts;
   }
 
   Future<void> likePost(int postId, String token) async {

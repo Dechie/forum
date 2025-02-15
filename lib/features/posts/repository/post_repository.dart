@@ -1,4 +1,5 @@
 import 'package:forumapp/features/posts/datasource/post_data_source.dart';
+import 'package:forumapp/features/posts/models/post.dart';
 
 class PostRepository {
   final PostDataSource dataSource;
@@ -8,9 +9,13 @@ class PostRepository {
 
   createPost(String content) {}
 
-  fetchPosts() {}
+  Future<List<Post>> fetchPosts() async {
+    try {
+      return await dataSource.fetchPosts();
+    } catch (e) {
+      rethrow;
+    }
+  }
 
   likePost(int postId) {}
-
-
 }
